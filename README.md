@@ -1,167 +1,97 @@
-# Projeto Arduino: Data Logger Magitech 🚀🌡️📅
+# Data Logger de Luminosidade, Temperatura e Umidade ☀️🌡️💧
 
-Este projeto é um sistema avançado de monitoramento dos padrões ambientais utilizando Arduino Uno R3. Ele integra um módulo RTC DS3231 para controle de data/hora, o sensor DHT11 para medições de temperatura e umidade, um sensor LDR para leitura de luminosidade e utiliza a EEPROM para registrar anomalias. Tudo é exibido em um LCD I2C com um menu interativo e animações divertidas.
-
----
-
-## Funcionalidades Principais 🔥
-
-- **Leitura de Sensores:**
-  - **Temperatura e Umidade:**  
-    O sensor DHT11 mede a temperatura (com conversão para Celsius, Fahrenheit ou Kelvin) e a umidade.  
-  - **Luminosidade:**  
-    O sensor LDR mede o nível de luminosidade ambiente.
-
-- **Controle do Tempo com RTC:**
-  - Integração com o módulo RTC DS3231 para obter data e hora atual.
-  - Ajuste de fuso horário (UTC-3, configurável).
-
-- **Registro de Anomalias na EEPROM:**
-  - Armazena registros (timestamp, temperatura e umidade) sempre que os valores estiverem fora dos limites definidos.
-  
-- **Interface no LCD I2C:**
-  - Exibe dados em tempo real com animações, menu interativo e tela “home”.
-  - Permite a navegação para configuração da escala de temperatura e exibição do relógio (RTC).
-
-- **Alertas Visuais e Sonoros:**
-  - **LEDs:** Indicam condições fora dos limites (ex.: LED vermelho para umidade fora da faixa de 40%-65%).  
-  - **Buzzer:** Emite som para alertar sobre anomalias.
-
-- **Monitor Serial:**
-  - Imprime periodicamente os dados lidos e os registros de anomalias para depuração.
+Bem-vindo(a) ao repositório do **Data Logger** que monitora luminosidade, temperatura e umidade, exibindo tudo em um **LCD** e registrando dados de anomalias na **EEPROM**.  
+Esse projeto conta com recursos de **menu interativo**, **conversão de escalas de temperatura**, **alertas com LEDs** e muito mais!  
 
 ---
 
-## Componentes Necessários 🛠️
+## ✨ Principais Destaques
 
-- **Arduino:** (ex.: Arduino Uno ou compatível)
-- **Display LCD I2C:** (16x2) 🖥️
-- **Sensor DHT22:** Para medições de temperatura e umidade 🌡️
-- **Módulo RTC DS3231:** Para controle de data/hora 📅
-- **EEPROM:** Para armazenamento dos registros (interna ou módulo externo) 💾
-- **Sensor LDR:** Para medições de luminosidade 💡
-- **Botões:** Quatro botões para navegação (UP, DOWN, SELECT, BACK) 🔘
-- **LEDs:** Três LEDs (vermelho, amarelo e verde) para alertas 🔴🟡🟢
-- **Buzzer:** Para alertas sonoros 🔔
-- **Protoboard e Jumpers:** Para montagem do circuito 🔌
+1. **Menu Principal Intuitivo**  
+   - Navegue usando botões físicos para:  
+     - Alterar a **escala de temperatura** (Celsius, Fahrenheit ou Kelvin).  
+     - Exibir a **tela HOME** com valores em tempo real.  
+     - Mostrar o **RTC** (Relógio de Tempo Real) configurado com fuso horário.  
 
----
+2. **Conversão de Escalas de Temperatura**  
+   - É possível alterar entre as escalas rapidamente.  
+   - A conversão é feita no próprio código para que as leituras sejam adaptadas à preferência do usuário.  
 
-## Conexões ⚡
+3. **Alertas Visuais e Sonoros**  
+   - **LEDs** coloridos indicam diferentes condições de anomalia:  
+     - LED **VERDE** para temperatura fora do intervalo configurado.  
+     - LED **VERMELHO** para umidade fora do intervalo.  
+     - LED **AMARELO** para luminosidade fora do intervalo.  
+   - **Buzzer** para alerta sonoro quando valores estão críticos.  
 
-- **LCD I2C:**  
-  - SDA/SCL: Conecte aos pinos I2C do Arduino (ex.: A4 e A5 no Arduino Uno)
+4. **Registro de Anomalias na EEPROM**  
+   - Sempre que ocorre uma medição fora dos limites, o evento é armazenado na memória EEPROM.  
+   - Informações como data/hora (via RTC), temperatura, umidade e luminosidade são registradas.  
 
-- **Sensor DHT22:**  
-  - Pino de Dados: Conecte ao pino digital 9
-
-- **Módulo RTC DS3231:**  
-  - Conecte ao barramento I2C (SDA e SCL)
-
-- **Sensor LDR:**  
-  - Pino Analógico: Conecte ao A0 (utilize um divisor de tensão se necessário)
-
-- **Botões:**  
-  - UP_BUTTON: Pino 3  
-  - DOWN_BUTTON: Pino 4  
-  - SELECT_BUTTON: Pino 5  
-  - BACK_BUTTON: Pino 2
-
-- **LEDs:**  
-  - LED_RED: Pino 8  
-  - LED_YEL: Pino 7  
-  - LED_GRE: Pino 6
-
-- **Buzzer:**  
-  - BUZZER_PIN: Pino 13
-
-- **EEPROM:**  
-  - Utilize a EEPROM interna ou um módulo externo conforme a necessidade.
+5. **Interface LCD**  
+   - O projeto utiliza um display LCD (16x2) para exibição dos menus, valores medidos e animações iniciais.  
+   - Interface amigável e fácil de visualizar.  
 
 ---
 
-## Instalação e Configuração ⚙️
+## 🛠️ Tecnologias e Bibliotecas Utilizadas
 
-1. **Instale as Bibliotecas Necessárias:**
-   - [LiquidCrystal_I2C](https://github.com/johnrickman/LiquidCrystal_I2C)
-   - [DHT Sensor Library](https://github.com/adafruit/DHT-sensor-library)
-   - [RTClib](https://github.com/adafruit/RTClib)
-   - A biblioteca **EEPROM** geralmente já está incluída no Arduino IDE.
-
-2. **Montagem do Circuito:**
-   - Conecte os componentes conforme descrito na seção de Conexões.
-
-3. **Upload do Código:**
-   - Abra o código no Arduino IDE, selecione a placa e a porta correta.
-   - Faça o upload para o Arduino.
+- **Arduino** (IDE ou PlatformIO)
+- **Linguagem C/C++** para microcontroladores
+- **Bibliotecas**:
+  - [LiquidCrystal_I2C](https://github.com/fdebrabander/Arduino-LiquidCrystal-I2C-library)  
+  - [Wire](https://www.arduino.cc/en/reference/wire)  
+  - [DHT](https://github.com/adafruit/DHT-sensor-library)  
+  - [RTClib](https://github.com/adafruit/RTClib)  
+  - [EEPROM](https://www.arduino.cc/en/Reference/EEPROM)  
 
 ---
 
-## Estrutura do Código 📂
+## ⚙️ Como o Projeto Funciona
 
-- **Includes & Defines:**  
-  - Inclusão das bibliotecas para LCD, RTC, DHT e EEPROM.
-  - Definição de constantes como endereços, dimensões, pinos, triggers para temperatura, umidade (atualizados para 40%-65%) e luminosidade.
+1. **Leitura de Sensores**  
+   - **DHT11** para temperatura e umidade.  
+   - **LDR** (sensor de luz) conectado na entrada analógica A0.  
 
-- **Objetos & Variáveis Globais:**  
-  - Instanciação do LCD, DHT, RTC e variáveis para controle de menu, leituras e alertas.
-  - Configuração da EEPROM para registro dos dados de anomalia.
+2. **Exibição de Dados**  
+   - Valores médios de temperatura e umidade são atualizados a cada 10 leituras.  
+   - O valor de luminosidade é convertido de 0 a 100%.  
 
-- **Setup:**  
-  - Inicializa a comunicação serial, o RTC, EEPROM, sensores e configura os pinos.
-  - Executa animações de introdução e exibe o menu principal.
+3. **Menu de Navegação**  
+   - Há quatro botões: **UP**, **DOWN**, **SELECT**, **BACK**.  
+   - O menu principal possui 3 opções básicas:  
+     1. **Escala de Temperatura**  
+     2. **HOME**  
+     3. **RTC**  
 
-- **Loop Principal:**  
-  - Lê os sensores (DHT e LDR) e atualiza os valores.
-  - Calcula a média das últimas 10 leituras para temperatura e umidade.
-  - Registra anomalias na EEPROM com timestamp via RTC.
-  - Atualiza o display e gerencia o menu (incluindo o menu do RTC).
-  - Imprime os dados no monitor serial.
+4. **Alertas**  
+   - Se qualquer valor (temperatura, umidade ou luminosidade) ultrapassar os limites definidos, um LED correspondente acende e o buzzer emite som.  
 
-- **Funções Auxiliares:**  
-  - **Alertas:** Verifica os limites dos sensores para acionar LEDs e buzzer.  
-  - **Menu e Animações:** Exibe o menu, submenus e animações (efeitos “mago” e “MAGITECH!”).  
-  - **EEPROM & Registro:** Funções para gravar e consultar registros na EEPROM.  
-  - **RTC:** Funções para exibir data/hora e ajustar o fuso horário.
+5. **Registro na EEPROM**  
+   - A cada minuto, se for detectada anomalia, os valores são gravados na EEPROM com base no **timestamp** (RTC).  
+   - O código gerencia o endereço de escrita para não sobrescrever registros anteriores.  
 
 ---
 
-## Uso 📖
+## 🚀 Montagem do Circuito
 
-- **Navegação no Menu:**
-  - Use os botões UP e DOWN para alternar entre as opções.
-  - Pressione SELECT para confirmar uma escolha.
-  - Utilize BACK para retornar ao menu anterior.
+- **RTC DS3231**: Comunicação I2C (pinos SDA, SCL).  
+- **LCD 16x2 I2C**: Mesmo barramento I2C (GND, VCC, SDA, SCL).  
+- **DHT11**: Pino de sinal no **D3** (ou conforme define o `#define DHTPIN 3`).  
+- **LDR**: Conectado ao pino **A0** com um resistor pull-down ou pull-up (divisor de tensão).  
+- **Botões**: Cada botão possui `INPUT_PULLUP`.  
+- **Buzzer**: Ligado ao pino **13**.  
+- **LEDs**:  
+  - **LED_RED** no pino **2**  
+  - **LED_YEL** no pino **4**  
+  - **LED_GRE** no pino **5**  
 
-- **Configuração da Escala de Temperatura:**
-  - No submenu, escolha entre Celsius, Fahrenheit ou Kelvin.
-
-- **Tela Home:**
-  - Exibe os valores médios de temperatura, umidade e luminosidade (atualizados a cada segundo).
-
-- **Menu do RTC:**
-  - Mostra a data e hora atuais obtidas via módulo RTC.
-  
-- **Registro de Anomalias:**
-  - Se os valores lidos estiverem fora dos limites (temperatura fora de 15-25°C, umidade fora de 40-65% e luminosidade fora de 0-30%), um registro com timestamp, temperatura e umidade é gravado na EEPROM.
-
-- **Alertas:**
-  - LEDs e buzzer são acionados para indicar quando os parâmetros estão fora dos limites seguros.
-
-- **Monitor Serial:**
-  - Para depuração, os dados e registros são impressos no monitor serial (9600 baud).
+> **Dica:** Consulte o diagrama de pinos no próprio código para detalhes completos de cada conexão.
 
 ---
 
-## Observação Final 🔚
+## 🔥 Como Usar
 
-Ajuste os limites e configurações conforme o ambiente onde o sistema será utilizado.
-
----
-
-## Licença 📄
-
-Distribuído sob a [Licença MIT](LICENSE).
-
----
-
+1. **Clonar o Repositório**  
+   ```bash
+   git clone https://github.com/seu-usuario/SeuDataLogger.git
