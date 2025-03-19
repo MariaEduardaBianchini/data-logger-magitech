@@ -1,6 +1,6 @@
 # Projeto Arduino: Data Logger Magitech 🚀🌡️📅
 
-Este projeto é um sistema avançado de monitoramento dos padrões ambientais utilizando Arduino. Ele integra um módulo RTC DS3231 para controle de data/hora, o sensor DHT22 para medições de temperatura e umidade, um sensor LDR para leitura de luminosidade e uma EEPROM para registrar anomalias. Tudo é exibido em um LCD I2C com um menu interativo e animações divertidas.
+Este projeto é um sistema avançado de monitoramento dos padrões ambientais utilizando Arduino Uno R3. Ele integra um módulo RTC DS3231 para controle de data/hora, o sensor DHT11 para medições de temperatura e umidade, um sensor LDR para leitura de luminosidade e utiliza a EEPROM para registrar anomalias. Tudo é exibido em um LCD I2C com um menu interativo e animações divertidas.
 
 ---
 
@@ -8,8 +8,7 @@ Este projeto é um sistema avançado de monitoramento dos padrões ambientais ut
 
 - **Leitura de Sensores:**
   - **Temperatura e Umidade:**  
-    O sensor DHT22 mede a temperatura (com conversão para Celsius, Fahrenheit ou Kelvin) e a umidade.  
-    **Atenção:** As condições de alerta para umidade foram atualizadas – agora, se a umidade média ficar abaixo de 40% ou acima de 65%, o sistema acionará um alerta.
+    O sensor DHT11 mede a temperatura (com conversão para Celsius, Fahrenheit ou Kelvin) e a umidade.  
   - **Luminosidade:**  
     O sensor LDR mede o nível de luminosidade ambiente.
 
